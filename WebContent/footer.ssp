@@ -1,0 +1,17 @@
+	</div>
+    <div id="footerWrap">
+     <div class="footbar">
+            	<img class="logoFooter" src="${"/images/logoCaelumGray-trans.png".url}" alt="vraptor logo" />
+                <ul>
+                	<li>site map:</li>
+                    <li><a href="${"".url}">home</a></li>
+                    <li>|</li>
+                    <li><a href="${"professores/form".url}">Adiciona Professor</a></li>
+                </ul>
+                <p><a href="http://www.apache.org/licenses/LICENSE-2.0">Licen�a Apache</a> - VRaptor �2009 Caelum - Ensino e Inova��o</p>
+            </div><!-- footnote-->
+        </div><!-- footer content -->
+        <a id="signature" href="mailto:lokidg@gmail.com">loki|design</a>
+    </div><!-- footer wrap-->   
+</body>
+</html>

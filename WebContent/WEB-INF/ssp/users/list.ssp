@@ -1,0 +1,14 @@
+<%@val users:Buffer[User]%>
+<% render("/header.ssp") %> 
+
+<h1>${"list_users".i18n}</h1>
+<table>
+#for(user <- users)
+	<tr>
+		<td><a href="${"users".url}/${user.getLogin}">${"view".i18n}</a></td>
+		<td>${user.getName}</td>
+	</tr>
+#end
+</table>
+
+<% render("/footer.ssp") %> 

@@ -1,0 +1,65 @@
+<%@ val userInfo:UserInfo = loggedUser %>
+<%@ val errors: Buffer[ValidationMessage] = Buffer[ValidationMessage]()%>
+<%@ val notice: String = null %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="author" content="Caelum"/>
+	<meta name="reply-to" content="contato@caelum.com.br"/>
+	<meta name="author" content="Design"/>
+	<meta name="reply-to" content="lokidg@gmail.com"/>
+
+	<meta name="description" content="${"meta.description".i18n}"/>
+	<meta name="keywords" content="sites, web, desenvolvimento, development, java, opensource"/>
+	<title>VRaptor - MyDvds</title>
+	<link href="${"mydvds.css".url}" rel="stylesheet" type="text/css" media="screen" />
+    <!--[if lt IE 7]>
+    <script src="http://ie7-js.googlecode.com/svn/version/2.0(beta3)/IE7.js" type="text/javascript"></script>
+    <![endif]-->
+</head>
+<body>
+	<div id="headerWrap">
+    	<div id="headerContent">
+        	<h1 id="logoVraptor"><span>V|Raptor</span></h1><!-- vraptorlogo-->
+            <ul id="langMenu">
+            	<li><a id="engBtn" href="?language=en"><span>ENGLISH</span></a></li>
+                <li><a id="ptBtn" href="?language=pt_BR"><span>PORTUGU�S</span></a></li>
+            </ul><!-- langMenu-->
+        </div><!-- header content -->
+    </div><!-- header wrap-->    
+    #if(userInfo.getUser!=null)
+	    <div id="userInfo">
+	    	<p>${userInfo.getUser.getName} - <a href=${"home/logout".url}>Logout</a></p>
+	    </div>
+	#end
+    <div id="menuWrap">
+    	<form class="busca" action="${"dvds/search".url}" method="get">
+	    	<ul id="menuElementsEn">
+	        	<li><a href="${"".url}"><span>home</span></a></li>
+			    #if(userInfo.getUser!=null)
+			    	<li><a href="${"users".url}">${"list_users".i18n}</a></li>
+			    	<li><input type="text" name="dvd.title" value="${"search.dvd".i18n}" 
+			    			onfocus="this.value='';" 
+		        			onblur="if (this.value == '') this.value='${"search.dvd".i18n}';"/>
+		        		<button type="submit">${"search".i18n}</button></li>
+			    #end
+	        </ul><!-- menuElements-->
+	    </form>
+    </div><!-- menuWrap-->
+	#if(errors.size>0)
+		<div id="errors">
+			<ul>
+				#for(error <- errors)
+					<li>${error.getCategory} - ${error.getMessage}</li>
+				#end
+			</ul>
+		</div>
+	#end
+	#if(notice!=null)
+		<div id="notice">
+			<p>${notice}</p>
+		</div>
+	#end
+	<div id="contentWrap">

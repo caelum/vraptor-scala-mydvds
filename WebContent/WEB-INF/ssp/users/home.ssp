@@ -1,0 +1,46 @@
+<%@val dvdTypes:Array[DvdType]%>
+<%@val dvd:Dvd = new Dvd%>
+<%@val userInfo:UserInfo = loggedUser %>
+<% render("/header.ssp") %> 
+
+<h1>${userInfo.getUser.getName}: ${"your_dvds".i18n}</h1>
+
+<table>
+	<thead>
+		<tr>
+			<td>Title</td>
+			<td>Description</td>
+			<td>Type</td>
+		</tr>
+	</thead>
+	<tbody>
+		#for((dvd,cont) <- userInfo.getUser.getDvds.withCounter)
+			<tr class=${cont.zebra}>
+				<td>${dvd.getTitle}</td>
+				<td>${dvd.getDescription}</td>
+				<td>${dvd.getType.i18n}</td>
+			</tr>
+		#end
+	</tbody>
+</table>
+<form action="${"dvds".url}"  name="dvdRegister" method="post">
+	<fieldset>
+		<legend>${"new_dvd".i18n}</legend>
+		<label for="title">${"dvd.title".i18n}</label>
+		<input type="text" id="title" name="dvd.title" value="${dvd.getTitle}"/>
+		<label for="description">${"dvd.description".i18n}</label>
+		<input type="text" id="description" name="dvd.description" value="${dvd.getDescription}"/>
+		<label for="file">${"sample_file".i18n}</label>
+		<input type="file" id="file" name="file"/>
+		<label for="type">${"dvd.type".i18n}</label>
+		<select name="dvd.type" id="type">
+			#for(dvdType <- dvdTypes)
+				<option value="${dvdType}">${dvdType.i18n}</option>
+			#end
+		</select>
+		<button type="submit" id="send">${"send".i18n}</button>
+	</fieldset>
+</form>
+	
+
+<% render("/footer.ssp") %> 

@@ -1,0 +1,13 @@
+<%
+import org.fusesource.scalate.servlet.ServletRenderContext._
+
+object MySnippets {
+  def foo = {
+    // thanks to the import I now have access to the renderContext
+    // along with the standard servlet objects:
+    // request, response, servletContext, servletConfig
+    println(request.getAttribute("javax.servlet.error.exception")); 
+  }
+}
+
+%>

@@ -1,0 +1,20 @@
+<%@val user:User %>
+<%@ val userInfo:UserInfo = loggedUser %>
+<%render("/header.ssp") %> 
+<h1>${user.getName}</h1>
+<table>
+#for(dvd <- user.getDvds)
+	<tr>
+	   <td>
+	       <form action="${"users".url}${userInfo.getUser.getLogin}/dvds/${dvd.getId}" method="post" class="buttonForm">
+	       		<input type="hidden" name="_method" value="PUT"/>
+	           <button type="submit" class="link">${"add_to_my_list".url}</button>
+	       </form>
+	   </td>
+	   <td>${dvd.getTitle}</td>
+	   <td>${dvd.getDescription}</td>
+	   <td>${dvd.getType.toString.i18n}</td>
+    </tr>
+#end
+</table>
+<%render("/footer.jsp")%>
